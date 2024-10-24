@@ -19,3 +19,11 @@
   font-family: "Inter";
   font-weight: 600;
 }
+@font-face {
+  font-display: swap;
+  font-style: normal;
+  src: url("/public/fonts/NotoSansSemiBold.ttf");
+  font-family: "Noto Sans";
+  font-weight: 600;
+}
+

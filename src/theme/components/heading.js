@@ -1,7 +1,16 @@
-const baseStyle = {};
-const sizes = {};
+const baseStyle = {
+  color: "gray.900",
+  fontFamily: "Noto Sans",
+};
+const sizes = {
+  headingxs: {
+    fontSize: "16px",
+    fontWeight: 600,
+    fontStyle: "bold",
+  },
+};
 const defaultProps = {
-  size: "",
+  size: "headingxs",
 };
 
 const Heading = {

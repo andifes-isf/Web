@@ -17,6 +17,16 @@ const Home = () => {
             Login
           </Link>
         </li>
+        <li style={{ marginBottom: "10px" }}>
+          <Link to="/home1" style={{ color: "#87CEFA", textDecoration: "none" }}>
+            Home
+          </Link>
+        </li>
+        <li style={{ marginBottom: "10px" }}>
+          <Link to="/usuario-cursista" style={{ color: "#87CEFA", textDecoration: "none" }}>
+          usuario-cursista
+          </Link>
+        </li>
       </ul>
     </div>
   );
