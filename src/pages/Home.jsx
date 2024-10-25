@@ -37,6 +37,11 @@ const Home = () => {
           relatorio-horas-praticas-cursista
           </Link>
         </li>
+        <li style={{ marginBottom: "10px" }}>
+          <Link to="/relatorio-orientacao" style={{ color: "#87CEFA", textDecoration: "none" }}>
+          relatorio-orientacao
+          </Link>
+        </li>
       </ul>
     </div>
   );
