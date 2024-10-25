@@ -1,9 +1,8 @@
 import { Box, Flex, IconButton } from "@chakra-ui/react";
 import React from "react";
 import { MenuItem, SubMenu, Menu, Sidebar, sidebarClasses } from "react-pro-sidebar";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { FiHome, FiUser, FiBook, FiFileText } from "react-icons/fi";
-import { IoIosArrowDroprightCircle, IoIosArrowDropdownCircle } from "react-icons/io";
+import { AiOutlineDown, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 export default function Sidebar1({ ...props }) {
   const [collapsed, setCollapsed] = React.useState(false);
@@ -108,9 +107,19 @@ export default function Sidebar1({ ...props }) {
             expandIcon: {
               render: ({ open }) =>
                 open ? (
-                  <IoIosArrowDropdownCircle size={16} color="black" />
+                  <IconButton
+                    icon={<AiOutlineDown />}
+                    aria-label="Expandir Submenu"
+                    variant="unstyled"
+                    size="sm"
+                  />
                 ) : (
-                  <IoIosArrowDroprightCircle size={16} color="black" />
+                  <IconButton
+                    icon={<AiOutlineRight />}
+                    aria-label="Expandir Submenu"
+                    variant="unstyled"
+                    size="sm"
+                  />
                 ),
               style: { alignSelf: 'center' },
             },
@@ -150,18 +159,19 @@ export default function Sidebar1({ ...props }) {
             Orientação
           </MenuItem>
         </SubMenu>
-      </Box>
 
-      <Flex alignSelf="center" alignItems="center" mt="auto" mb="4">
-        <IconButton
-          icon={collapsed ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          onClick={toggleSidebar}
-          aria-label="Toggle Sidebar"
-          bg="transparent"
-          _hover={{ bg: "gray.100" }}
-          size="lg"
-        />
-      </Flex>
+        {/* Botão para expandir/contrair a Sidebar logo abaixo de Relatórios */}
+        <Flex alignSelf="center" alignItems="center" mt="4" mb="4">
+          <IconButton
+            icon={collapsed ? <AiOutlineRight /> : <AiOutlineLeft />}
+            onClick={toggleSidebar}
+            aria-label="Toggle Sidebar"
+            bg="transparent"
+            _hover={{ bg: "gray.100" }}
+            size="lg"
+          />
+        </Flex>
+      </Box>
     </Box>
   );
 }
