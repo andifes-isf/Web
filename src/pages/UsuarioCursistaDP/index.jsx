@@ -2,15 +2,15 @@ import React from 'react';
 import { Box, Flex, Heading, Button, Input, Avatar, IconButton, VStack, HStack, Tabs, Tab, TabList, TabPanel, TabPanels, Text } from '@chakra-ui/react';
 import { DownloadIcon, EditIcon } from '@chakra-ui/icons';
 import { FaCamera } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';  // Importa o useNavigate
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import Sidebar1 from '../../components/Sidebar1';
 
 const UsuarioCursistaDP = () => {
-  const navigate = useNavigate();  // Instancia o hook useNavigate
+  const navigate = useNavigate();
 
   const handleEditClick = () => {
-    navigate('/usuario-cursista-edicao');  // Redireciona para a página de edição
+    navigate('/usuario-cursista-edicao');
   };
 
   return (
@@ -31,11 +31,12 @@ const UsuarioCursistaDP = () => {
                   borderRadius="full"
                   size="sm"
                 />
+                {/* Alinhando o nome e email logo após o ícone da câmera */}
+                <VStack align="start" spacing="0" ml="4">
+                  <Heading size="md">Nome e Sobrenome</Heading>
+                  <Box>email@email.com</Box>
+                </VStack>
               </HStack>
-              <VStack align="start" spacing="0">
-                <Heading size="md">Nome e Sobrenome</Heading>
-                <Box>email@email.com</Box>
-              </VStack>
               <Button leftIcon={<EditIcon />} colorScheme="gray" onClick={handleEditClick}>
                 Editar
               </Button>

@@ -24,11 +24,11 @@ const UsuarioCursistaDPEdicao = () => {
                   borderRadius="full"
                   size="sm"
                 />
-              </HStack>
-              <VStack align="start" spacing="0">
+              <VStack align="start" spacing="0" ml="4">
                 <Heading size="md">Nome e Sobrenome</Heading>
                 <Box>email@email.com</Box>
               </VStack>
+              </HStack>
               <Button leftIcon={<EditIcon />} colorScheme="gray">
                 Salvar
               </Button>
