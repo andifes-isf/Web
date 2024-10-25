@@ -6,6 +6,7 @@ import Login from "pages/Login";
 import Home1 from "pages/Home1";
 import UsuarioCursistaDP from "pages/UsuarioCursistaDP";
 import UsuarioCursistaDPEdicao from "pages/UsuarioCursistaDPEdicao";
+import RelatorioHorasPraticasCursista from "pages/RelatorioHorasPraticasCursista";
 
 const ProjectRoutes = () => {
   let element = useRoutes([
@@ -26,6 +27,10 @@ const ProjectRoutes = () => {
     {
       path: "usuario-cursista-edicao", // Definindo o caminho da nova página
       element: <UsuarioCursistaDPEdicao />,
+    },
+    {
+      path: "relatorio-horas-praticas-cursista", // Definindo o caminho da nova página
+      element: <RelatorioHorasPraticasCursista />,
     },
   ]);
 

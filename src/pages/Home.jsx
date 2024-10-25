@@ -32,6 +32,11 @@ const Home = () => {
           usuario-cursista-edicao
           </Link>
         </li>
+        <li style={{ marginBottom: "10px" }}>
+          <Link to="/relatorio-horas-praticas-cursista" style={{ color: "#87CEFA", textDecoration: "none" }}>
+          relatorio-horas-praticas-cursista
+          </Link>
+        </li>
       </ul>
     </div>
   );
