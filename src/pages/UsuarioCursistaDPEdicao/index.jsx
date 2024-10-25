@@ -2,17 +2,10 @@ import React from 'react';
 import { Box, Flex, Heading, Button, Input, Avatar, IconButton, VStack, HStack, Tabs, Tab, TabList, TabPanel, TabPanels, Text } from '@chakra-ui/react';
 import { DownloadIcon, EditIcon } from '@chakra-ui/icons';
 import { FaCamera } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';  // Importa o useNavigate
 import Header from '../../components/Header';
 import Sidebar1 from '../../components/Sidebar1';
 
-const UsuarioCursistaDP = () => {
-  const navigate = useNavigate();  // Instancia o hook useNavigate
-
-  const handleEditClick = () => {
-    navigate('/usuario-cursista-edicao');  // Redireciona para a página de edição
-  };
-
+const UsuarioCursistaDPEdicao = () => {
   return (
     <Flex direction="column" height="100vh">
       <Header />
@@ -36,8 +29,8 @@ const UsuarioCursistaDP = () => {
                 <Heading size="md">Nome e Sobrenome</Heading>
                 <Box>email@email.com</Box>
               </VStack>
-              <Button leftIcon={<EditIcon />} colorScheme="gray" onClick={handleEditClick}>
-                Editar
+              <Button leftIcon={<EditIcon />} colorScheme="gray">
+                Salvar
               </Button>
             </Flex>
 
@@ -50,7 +43,7 @@ const UsuarioCursistaDP = () => {
 
               <TabPanels>
                 <TabPanel>
-                  {/* Seção de Dados com títulos acima */}
+                  {/* Seção de Dados com edição habilitada */}
                   <VStack spacing="4">
                     <Flex width="100%" justify="space-between">
                       {/* Coluna 1: Dados Pessoais */}
@@ -58,19 +51,19 @@ const UsuarioCursistaDP = () => {
                         <Heading size="xs">Dados Pessoais</Heading>
                         <Box mt="2">
                           <Text fontWeight="bold">Nome Completo</Text>
-                          <Input placeholder="Nome Completo" value="Nome Sobrenome" isReadOnly />
+                          <Input placeholder="Nome Completo" defaultValue="Nome Sobrenome" />
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Telefone</Text>
-                          <Input placeholder="Telefone" value="(99) 99999-9999" isReadOnly />
+                          <Input placeholder="Telefone" defaultValue="(99) 99999-9999" />
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Etnia</Text>
-                          <Input placeholder="Etnia" value="Pardo" isReadOnly />
+                          <Input placeholder="Etnia" defaultValue="Pardo" />
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Gênero</Text>
-                          <Input placeholder="Gênero" value="Masculino" isReadOnly />
+                          <Input placeholder="Gênero" defaultValue="Masculino" />
                         </Box>
                       </Box>
 
@@ -79,11 +72,11 @@ const UsuarioCursistaDP = () => {
                         <Heading size="xs">Proeficiência Linguística</Heading>
                         <Box mt="2">
                           <Text fontWeight="bold">Nível</Text>
-                          <Input placeholder="Nível" value="Avançado" isReadOnly />
+                          <Input placeholder="Nível" defaultValue="Avançado" />
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Idioma</Text>
-                          <Input placeholder="Idioma" value="Inglês" isReadOnly />
+                          <Input placeholder="Idioma" defaultValue="Inglês" />
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Documento Comprobatório</Text>
@@ -98,7 +91,7 @@ const UsuarioCursistaDP = () => {
                         <Heading size="xs">Instituição</Heading>
                         <Box mt="2">
                           <Text fontWeight="bold">Nome da Instituição</Text>
-                          <Input placeholder="Nome da Instituição" value="Universidade XYZ" isReadOnly />
+                          <Input placeholder="Nome da Instituição" defaultValue="Universidade XYZ" />
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Comprovante de Matrícula</Text>
@@ -112,7 +105,7 @@ const UsuarioCursistaDP = () => {
                 </TabPanel>
 
                 <TabPanel>
-                  {/* Seção de Componentes Curriculares */}
+                  {/* Seção de Componentes Curriculares sem edição */}
                   <VStack spacing="4">
                     <Flex width="100%" justify="space-between">
                       {/* Coluna 1: Componentes Curriculares */}
@@ -183,4 +176,4 @@ const UsuarioCursistaDP = () => {
   );
 };
 
-export default UsuarioCursistaDP;
+export default UsuarioCursistaDPEdicao;

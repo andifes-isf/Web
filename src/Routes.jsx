@@ -4,7 +4,8 @@ import Home from "pages/Home";
 import NotFound from "pages/NotFound";
 import Login from "pages/Login";
 import Home1 from "pages/Home1";
-import UsuarioCursistaDP from "pages/UsuarioCursistaDP"; // Importação da nova página
+import UsuarioCursistaDP from "pages/UsuarioCursistaDP";
+import UsuarioCursistaDPEdicao from "pages/UsuarioCursistaDPEdicao";
 
 const ProjectRoutes = () => {
   let element = useRoutes([
@@ -21,6 +22,10 @@ const ProjectRoutes = () => {
     {
       path: "usuario-cursista", // Definindo o caminho da nova página
       element: <UsuarioCursistaDP />,
+    },
+    {
+      path: "usuario-cursista-edicao", // Definindo o caminho da nova página
+      element: <UsuarioCursistaDPEdicao />,
     },
   ]);
 

@@ -27,6 +27,11 @@ const Home = () => {
           usuario-cursista
           </Link>
         </li>
+        <li style={{ marginBottom: "10px" }}>
+          <Link to="/usuario-cursista-edicao" style={{ color: "#87CEFA", textDecoration: "none" }}>
+          usuario-cursista-edicao
+          </Link>
+        </li>
       </ul>
     </div>
   );
