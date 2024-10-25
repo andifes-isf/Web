@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Heading, Button, Input, Avatar, IconButton, VStack, HStack, Tabs, Tab, TabList, TabPanel, TabPanels, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Button, Input, Avatar, IconButton, VStack, HStack, Tabs, Tab, TabList, TabPanel, TabPanels, Text, Select } from '@chakra-ui/react';
 import { DownloadIcon, EditIcon } from '@chakra-ui/icons';
 import { FaCamera } from 'react-icons/fa';
 import Header from '../../components/Header';
@@ -59,11 +59,23 @@ const UsuarioCursistaDPEdicao = () => {
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Etnia</Text>
-                          <Input placeholder="Etnia" defaultValue="Pardo" />
+                          <Select defaultValue="Pardo">
+                            <option value="Amarelo">Amarelo</option>
+                            <option value="Branco">Branco</option>
+                            <option value="Indígena">Indígena</option>
+                            <option value="Pardo">Pardo</option>
+                            <option value="Preto">Preto</option>
+                            <option value="Quilombola">Quilombola</option>
+                          </Select>
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Gênero</Text>
-                          <Input placeholder="Gênero" defaultValue="Masculino" />
+                          <Select defaultValue="Masculino">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                            <option value="Não-binário">Não-binário</option>
+                            <option value="Outro">Outro</option>
+                          </Select>
                         </Box>
                       </Box>
 
@@ -72,11 +84,21 @@ const UsuarioCursistaDPEdicao = () => {
                         <Heading size="xs">Proeficiência Linguística</Heading>
                         <Box mt="2">
                           <Text fontWeight="bold">Nível</Text>
-                          <Input placeholder="Nível" defaultValue="Avançado" />
+                          <Select defaultValue="Avançado">
+                            <option value="Básico">Básico</option>
+                            <option value="Intermediário">Intermediário</option>
+                            <option value="Avançado">Avançado</option>
+                          </Select>
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Idioma</Text>
-                          <Input placeholder="Idioma" defaultValue="Inglês" />
+                          <Select defaultValue="Inglês">
+                            <option value="Inglês">Inglês</option>
+                            <option value="Espanhol">Espanhol</option>
+                            <option value="Francês">Francês</option>
+                            <option value="Alemão">Alemão</option>
+                            <option value="Outro">Outro</option>
+                          </Select>
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Documento Comprobatório</Text>
