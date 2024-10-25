@@ -42,6 +42,11 @@ const Home = () => {
           relatorio-orientacao
           </Link>
         </li>
+        <li style={{ marginBottom: "10px" }}>
+          <Link to="/relatorio-horas-teoricas" style={{ color: "#87CEFA", textDecoration: "none" }}>
+          relatorio-horas-teoricas
+          </Link>
+        </li>
       </ul>
     </div>
   );

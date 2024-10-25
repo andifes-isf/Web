@@ -8,6 +8,7 @@ import UsuarioCursistaDP from "pages/UsuarioCursistaDP";
 import UsuarioCursistaDPEdicao from "pages/UsuarioCursistaDPEdicao";
 import RelatorioHorasPraticasCursista from "pages/RelatorioHorasPraticasCursista";
 import RelatorioOrientacao from "pages/RelatorioOrientacao";
+import RelatorioHorasTeoricas from "pages/RelatorioHorasTeoricas";
 
 const ProjectRoutes = () => {
   let element = useRoutes([
@@ -36,6 +37,10 @@ const ProjectRoutes = () => {
     {
       path: "relatorio-orientacao", // Definindo o caminho da nova página
       element: <RelatorioOrientacao />,
+    },
+    {
+      path: "relatorio-horas-teoricas", // Definindo o caminho da nova página
+      element: <RelatorioHorasTeoricas />,
     },
   ]);
 
