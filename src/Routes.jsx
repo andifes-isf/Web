@@ -11,6 +11,7 @@ import RelatorioOrientacao from "pages/RelatorioOrientacao";
 import RelatorioHorasTeoricas from "pages/RelatorioHorasTeoricas";
 import CursoAtualCursista from "pages/CursoAtualCursista";
 import FeedbackCursista from "pages/FeedbackCursista";
+import Ementa from "pages/Ementa";
 
 const ProjectRoutes = () => {
   let element = useRoutes([
@@ -51,6 +52,10 @@ const ProjectRoutes = () => {
     {
       path: "feedback-cursista", // Definindo o caminho da nova página
       element: <FeedbackCursista />,
+    },
+    {
+      path: "ementa", // Definindo o caminho da nova página
+      element: <Ementa />,
     },
   ]);
 
