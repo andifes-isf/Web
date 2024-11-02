@@ -47,6 +47,11 @@ const Home = () => {
           relatorio-horas-teoricas
           </Link>
         </li>
+        <li style={{ marginBottom: "10px" }}>
+          <Link to="/curso-atual-cursista" style={{ color: "#87CEFA", textDecoration: "none" }}>
+          curso-atual-cursista
+          </Link>
+        </li>
       </ul>
     </div>
   );
