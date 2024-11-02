@@ -62,6 +62,11 @@ const Home = () => {
           ementa
           </Link>
         </li>
+        <li style={{ marginBottom: "10px" }}>
+          <Link to="/ouvidoria" style={{ color: "#87CEFA", textDecoration: "none" }}>
+          ouvidoria
+          </Link>
+        </li>
       </ul>
     </div>
   );
