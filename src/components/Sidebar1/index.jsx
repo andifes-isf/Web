@@ -1,8 +1,8 @@
 import { Box, Flex, IconButton } from "@chakra-ui/react";
 import React from "react";
-import { MenuItem, SubMenu, Menu, Sidebar, sidebarClasses } from "react-pro-sidebar";
-import { FiHome, FiUser, FiBook, FiFileText } from "react-icons/fi";
-import { AiOutlineDown, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { MenuItem, Menu, Sidebar, sidebarClasses } from "react-pro-sidebar";
+import { FiHome, FiUser, FiFileText } from "react-icons/fi";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 export default function Sidebar1({ ...props }) {
   const [collapsed, setCollapsed] = React.useState(false);
@@ -19,10 +19,9 @@ export default function Sidebar1({ ...props }) {
       collapsed={collapsed}
       rootStyles={{ [`.${sidebarClasses.container}`]: { gap: 270 } }}
       as={Sidebar}
-      gap={{ md: "270px", base: "135px", sm: "202px" }}
       display="flex"
       flexDirection="column"
-      bg="white.a700"
+      bg="white"
       boxShadow="xs"
       h="100vh"
       top="0px"
@@ -53,14 +52,12 @@ export default function Sidebar1({ ...props }) {
         <MenuItem
           icon={<FiHome size={24} color="black" />}
           style={{
-            backgroundColor: "#f0f0f0",
+            backgroundColor: "white",
             color: "black",
             borderRadius: "8px",
             padding: "8px",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             fontWeight: "bold",
-            backgroundColor: "white", // Fundo sólido
-            zIndex: "100",
             position: "relative",
           }}
         >
@@ -72,95 +69,46 @@ export default function Sidebar1({ ...props }) {
           icon={<FiUser size={16} />}
           style={{
             paddingLeft: "16px",
-            zIndex: "100",
             position: "relative",
           }}
         >
           {!collapsed && "Cursista"}
         </MenuItem>
 
-        {/* Botão Matérias */}
+        {/* Botão Horas Práticas */}
         <MenuItem
-          icon={<FiBook size={16} />}
-          style={{
-            paddingLeft: "16px",
-            zIndex: "100",
-            position: "relative",
-          }}
-        >
-          {!collapsed && "Matérias"}
-        </MenuItem>
-
-        {/* Submenu Relatórios */}
-        <SubMenu
-          label="Relatórios"
           icon={<FiFileText size={16} />}
           style={{
             paddingLeft: "16px",
-            display: "flex",
-            alignItems: "center",
-            zIndex: "100", // Z-index alto para garantir que cubra o conteúdo
             position: "relative",
-            borderRadius: "4px",
-          }}
-          componentsProps={{
-            expandIcon: {
-              render: ({ open }) =>
-                open ? (
-                  <IconButton
-                    icon={<AiOutlineDown />}
-                    aria-label="Expandir Submenu"
-                    variant="unstyled"
-                    size="sm"
-                  />
-                ) : (
-                  <IconButton
-                    icon={<AiOutlineRight />}
-                    aria-label="Expandir Submenu"
-                    variant="unstyled"
-                    size="sm"
-                  />
-                ),
-              style: { alignSelf: 'center' },
-            },
           }}
         >
-          <MenuItem
-            style={{
-              paddingLeft: "32px",
-              fontSize: "14px",
-              zIndex: "100",
-              position: "relative",
-              backgroundColor: "white", // Cor de fundo sólida para o item
-            }}
-          >
-            Horas Práticas
-          </MenuItem>
-          <MenuItem
-            style={{
-              paddingLeft: "32px",
-              fontSize: "14px",
-              zIndex: "100",
-              position: "relative",
-              backgroundColor: "white", // Cor de fundo sólida para o item
-            }}
-          >
-            Horas Teóricas
-          </MenuItem>
-          <MenuItem
-            style={{
-              paddingLeft: "32px",
-              fontSize: "14px",
-              zIndex: "100",
-              position: "relative",
-              backgroundColor: "white", // Cor de fundo sólida para o item
-            }}
-          >
-            Orientação
-          </MenuItem>
-        </SubMenu>
+          {!collapsed && "Horas Práticas"}
+        </MenuItem>
 
-        {/* Botão para expandir/contrair a Sidebar logo abaixo de Relatórios */}
+        {/* Botão Horas Teóricas */}
+        <MenuItem
+          icon={<FiFileText size={16} />}
+          style={{
+            paddingLeft: "16px",
+            position: "relative",
+          }}
+        >
+          {!collapsed && "Horas Teóricas"}
+        </MenuItem>
+
+        {/* Botão Orientação */}
+        <MenuItem
+          icon={<FiFileText size={16} />}
+          style={{
+            paddingLeft: "16px",
+            position: "relative",
+          }}
+        >
+          {!collapsed && "Orientação"}
+        </MenuItem>
+
+        {/* Botão para expandir/contrair a Sidebar */}
         <Flex alignSelf="center" alignItems="center" mt="4" mb="4">
           <IconButton
             icon={collapsed ? <AiOutlineRight /> : <AiOutlineLeft />}

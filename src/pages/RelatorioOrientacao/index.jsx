@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Heading, Button, Input, Select, VStack } from '@chakra-ui/react';
+import { Box, Flex, Heading, Button, Input, Select, VStack, Checkbox, CheckboxGroup, Stack } from '@chakra-ui/react';
 import Header from '../../components/Header';
 import Sidebar1 from '../../components/Sidebar1';
 
@@ -23,7 +23,7 @@ const RelatorioOrientacao = () => {
                 <VStack spacing="4">
                   <Box w="100%">
                     <Heading size="xs" mb="2">Avaliação</Heading>
-                    <Select placeholder="Avaliação">
+                    <Select placeholder="Selecione a Avaliação">
                       <option value="Excelente">Excelente</option>
                       <option value="Bom">Bom</option>
                       <option value="Regular">Regular</option>
@@ -32,13 +32,29 @@ const RelatorioOrientacao = () => {
                   </Box>
 
                   <Box w="100%">
+                    <Heading size="xs" mb="2">Data</Heading>
+                    <Input type="date" placeholder="Data" />
+                  </Box>
+
+                  <Box w="100%">
                     <Heading size="xs" mb="2">Carga Horária</Heading>
                     <Input placeholder="Carga Horária" />
                   </Box>
 
                   <Box w="100%">
-                    <Heading size="xs" mb="2">Observação</Heading>
-                    <Input placeholder="Observação" />
+                    <Heading size="xs" mb="2">Categoria</Heading>
+                    <CheckboxGroup>
+                      <Stack spacing={2} direction="column">
+                        <Checkbox value="Categoria A">Categoria A</Checkbox>
+                        <Checkbox value="Categoria B">Categoria B</Checkbox>
+                        <Checkbox value="Categoria C">Categoria C</Checkbox>
+                      </Stack>
+                    </CheckboxGroup>
+                  </Box>
+
+                  <Box w="100%">
+                    <Heading size="xs" mb="2">Descrição</Heading>
+                    <Input placeholder="Descrição" />
                   </Box>
                 </VStack>
               </Box>

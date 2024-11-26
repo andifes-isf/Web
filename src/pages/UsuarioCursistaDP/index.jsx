@@ -1,10 +1,27 @@
 import React from 'react';
-import { Box, Flex, Heading, Button, Input, Avatar, IconButton, VStack, HStack, Tabs, Tab, TabList, TabPanel, TabPanels, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Heading,
+  Button,
+  Input,
+  Avatar,
+  IconButton,
+  VStack,
+  HStack,
+  Tabs,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Text
+} from '@chakra-ui/react';
 import { DownloadIcon, EditIcon } from '@chakra-ui/icons';
 import { FaCamera } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import Sidebar1 from '../../components/Sidebar1';
+
 
 const UsuarioCursistaDP = () => {
   const navigate = useNavigate();
@@ -42,16 +59,17 @@ const UsuarioCursistaDP = () => {
               </Button>
             </Flex>
 
-            {/* Tabs para dados e componentes curriculares */}
+            {/* Tabs para Dados, Componentes Curriculares e Horas */}
             <Tabs variant="enclosed">
               <TabList>
                 <Tab>Dados</Tab>
                 <Tab>Componentes Curriculares</Tab>
+                <Tab>Horas</Tab>
               </TabList>
 
               <TabPanels>
+                {/* Aba Dados */}
                 <TabPanel>
-                  {/* Seção de Dados com títulos acima */}
                   <VStack spacing="4">
                     <Flex width="100%" justify="space-between">
                       {/* Coluna 1: Dados Pessoais */}
@@ -112,14 +130,12 @@ const UsuarioCursistaDP = () => {
                   </VStack>
                 </TabPanel>
 
+                {/* Aba Componentes Curriculares */}
                 <TabPanel>
-                  {/* Seção de Componentes Curriculares */}
                   <VStack spacing="4">
                     <Flex width="100%" justify="space-between">
-                      {/* Coluna 1: Componentes Curriculares */}
                       <Box flex="1" mr="4">
                         <Heading size="xs">Componentes Curriculares</Heading>
-
                         <Box mt="2">
                           <Text fontWeight="bold">Núcleo Comum</Text>
                           <Flex>
@@ -127,7 +143,6 @@ const UsuarioCursistaDP = () => {
                             <Input placeholder="Total Horas" value="100h" isReadOnly ml="2" />
                           </Flex>
                         </Box>
-
                         <Box mt="2">
                           <Text fontWeight="bold">CCI</Text>
                           <Flex>
@@ -135,46 +150,45 @@ const UsuarioCursistaDP = () => {
                             <Input placeholder="Total Horas" value="100h" isReadOnly ml="2" />
                           </Flex>
                         </Box>
-
                         <Box mt="2">
                           <Text fontWeight="bold">CCTI</Text>
                           <Flex>
-                            <Input placeholder="Horas Atuais" value="50h" isReadOnly />
+                            <Input placeholder="Horas Atuais" value="30h" isReadOnly />
                             <Input placeholder="Total Horas" value="100h" isReadOnly ml="2" />
                           </Flex>
                         </Box>
-
                         <Box mt="2">
                           <Text fontWeight="bold">CCI - P</Text>
                           <Flex>
-                            <Input placeholder="Horas Atuais" value="25h" isReadOnly />
+                            <Input placeholder="Horas Atuais" value="30h" isReadOnly />
                             <Input placeholder="Total Horas" value="100h" isReadOnly ml="2" />
                           </Flex>
-                        </Box>
-                      </Box>
-
-                      {/* Coluna 2: Horas (Práticas, Teóricas, Orientação) */}
-                      <Box flex="1">
-                        <Heading size="xs">Horas</Heading>
-
-                        <Box mt="2">
-                          <Text fontWeight="bold">Horas Práticas</Text>
-                          <Input placeholder="Horas Práticas" value="40h" isReadOnly />
-                        </Box>
-
-                        <Box mt="2">
-                          <Text fontWeight="bold">Horas Teóricas</Text>
-                          <Input placeholder="Horas Teóricas" value="60h" isReadOnly />
-                        </Box>
-
-                        <Box mt="2">
-                          <Text fontWeight="bold">Horas Orientação</Text>
-                          <Input placeholder="Horas Orientação" value="20h" isReadOnly />
                         </Box>
                       </Box>
                     </Flex>
                   </VStack>
                 </TabPanel>
+
+                <TabPanel>
+                  {/* Seção de Horas */}
+                  <VStack spacing="4" align="start"> {/* Alinha os itens à esquerda */}
+                    <Box>
+                      <Heading size="xs" mb="2">Horas Práticas</Heading>
+                      <Input placeholder="Horas Práticas" value="40h" isReadOnly />
+                    </Box>
+
+                    <Box>
+                      <Heading size="xs" mb="2">Horas Teóricas</Heading>
+                      <Input placeholder="Horas Teóricas" value="60h" isReadOnly />
+                    </Box>
+
+                    <Box>
+                      <Heading size="xs" mb="2">Horas Orientação</Heading>
+                      <Input placeholder="Horas Orientação" value="20h" isReadOnly />
+                    </Box>
+                  </VStack>
+                </TabPanel>
+
               </TabPanels>
             </Tabs>
           </Box>

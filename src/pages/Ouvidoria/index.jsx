@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Heading, Button, Select, Textarea, Checkbox, VStack } from '@chakra-ui/react';
+import { Box, Flex, Heading, Button, Select, Textarea, Checkbox, VStack, Input } from '@chakra-ui/react';
 import Header from '../../components/Header';
 import Sidebar1 from '../../components/Sidebar1';
 
@@ -26,16 +26,23 @@ const Ouvidoria = () => {
               <Box>
                 <Heading size="xs" mb="2">Qual o principal tópico da mensagem?</Heading>
                 <Select placeholder="Escolha">
-                  <option value="duvida">Dúvida</option>
-                  <option value="reclamacao">Reclamação</option>
-                  <option value="elogio">Elogio</option>
-                  <option value="sugestao">Sugestão</option>
+                  <option value="duvida">Orientações</option>
+                  <option value="reclamacao">Aulas Moodle</option>
+                  <option value="elogio">Horas Práticas</option>
+                  <option value="sugestao">Questão Administrativas</option>
+                  <option value="outros">Outros</option>
                 </Select>
               </Box>
 
               <Box>
-                <Heading size="xs" mb="2">Digite sua resposta</Heading>
-                <Textarea placeholder="Digite sua resposta" />
+                <Heading size="xs" mb="2">Digite sua mensagem</Heading>
+                <Textarea placeholder="Digite sua mensagem" />
+              </Box>
+
+              {/* Campo para Upload de Imagem */}
+              <Box>
+                <Heading size="xs" mb="2">Enviar imagem (opcional)</Heading>
+                <Input type="file" accept="image/*" />
               </Box>
 
               <Checkbox>Enviar anonimamente</Checkbox>

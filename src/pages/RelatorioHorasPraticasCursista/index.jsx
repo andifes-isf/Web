@@ -107,6 +107,7 @@ const RelatorioHorasPraticasCursista = () => {
                         <Th>Categoria</Th>
                         <Th>Orientador</Th>
                         <Th>Data de Entrega</Th>
+                        <Th>Carga Horária</Th>
                         <Th>Feedback</Th>
                         <Th>Status</Th>
                         <Th>Ação</Th>
@@ -117,6 +118,7 @@ const RelatorioHorasPraticasCursista = () => {
                         <Td>Categoria A</Td>
                         <Td>Dr. Silva</Td>
                         <Td>10/10/2023</Td>
+                        <Td>20h</Td>
                         <Td>Aprovado</Td>
                         <Td>Concluído</Td>
                         <Td>
@@ -127,6 +129,7 @@ const RelatorioHorasPraticasCursista = () => {
                         <Td>Categoria B</Td>
                         <Td>Prof. Lima</Td>
                         <Td>20/09/2023</Td>
+                        <Td>15h</Td>
                         <Td>Pendente</Td>
                         <Td>Em Progresso</Td>
                         <Td>
@@ -137,6 +140,7 @@ const RelatorioHorasPraticasCursista = () => {
                         <Td>Categoria C</Td>
                         <Td>Dr. Costa</Td>
                         <Td>15/08/2023</Td>
+                        <Td>10h</Td>
                         <Td>Revisão</Td>
                         <Td>Pendente</Td>
                         <Td>

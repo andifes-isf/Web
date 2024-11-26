@@ -1,5 +1,22 @@
 import React from 'react';
-import { Box, Flex, Heading, Button, Input, Avatar, IconButton, VStack, HStack, Tabs, Tab, TabList, TabPanel, TabPanels, Text, Select } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Heading,
+  Button,
+  Input,
+  Avatar,
+  IconButton,
+  VStack,
+  HStack,
+  Tabs,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Text,
+  Select,
+} from '@chakra-ui/react';
 import { DownloadIcon, EditIcon } from '@chakra-ui/icons';
 import { FaCamera } from 'react-icons/fa';
 import Header from '../../components/Header';
@@ -24,21 +41,20 @@ const UsuarioCursistaDPEdicao = () => {
                   borderRadius="full"
                   size="sm"
                 />
-              <VStack align="start" spacing="0" ml="4">
-                <Heading size="md">Nome e Sobrenome</Heading>
-                <Box>email@email.com</Box>
-              </VStack>
+                <VStack align="start" spacing="0" ml="4">
+                  <Heading size="md">Nome e Sobrenome</Heading>
+                  <Box>email@email.com</Box>
+                </VStack>
               </HStack>
               <Button leftIcon={<EditIcon />} colorScheme="gray">
                 Salvar
               </Button>
             </Flex>
 
-            {/* Tabs para dados e componentes curriculares */}
+            {/* Apenas a aba Dados */}
             <Tabs variant="enclosed">
               <TabList>
                 <Tab>Dados</Tab>
-                <Tab>Componentes Curriculares</Tab>
               </TabList>
 
               <TabPanels>
@@ -120,70 +136,6 @@ const UsuarioCursistaDPEdicao = () => {
                           <Button leftIcon={<DownloadIcon />} colorScheme="gray" variant="outline">
                             Comprovante.pdf
                           </Button>
-                        </Box>
-                      </Box>
-                    </Flex>
-                  </VStack>
-                </TabPanel>
-
-                <TabPanel>
-                  {/* Seção de Componentes Curriculares sem edição */}
-                  <VStack spacing="4">
-                    <Flex width="100%" justify="space-between">
-                      {/* Coluna 1: Componentes Curriculares */}
-                      <Box flex="1" mr="4">
-                        <Heading size="xs">Componentes Curriculares</Heading>
-
-                        <Box mt="2">
-                          <Text fontWeight="bold">Núcleo Comum</Text>
-                          <Flex>
-                            <Input placeholder="Horas Atuais" value="40h" isReadOnly />
-                            <Input placeholder="Total Horas" value="100h" isReadOnly ml="2" />
-                          </Flex>
-                        </Box>
-
-                        <Box mt="2">
-                          <Text fontWeight="bold">CCI</Text>
-                          <Flex>
-                            <Input placeholder="Horas Atuais" value="30h" isReadOnly />
-                            <Input placeholder="Total Horas" value="100h" isReadOnly ml="2" />
-                          </Flex>
-                        </Box>
-
-                        <Box mt="2">
-                          <Text fontWeight="bold">CCTI</Text>
-                          <Flex>
-                            <Input placeholder="Horas Atuais" value="50h" isReadOnly />
-                            <Input placeholder="Total Horas" value="100h" isReadOnly ml="2" />
-                          </Flex>
-                        </Box>
-
-                        <Box mt="2">
-                          <Text fontWeight="bold">CCI - P</Text>
-                          <Flex>
-                            <Input placeholder="Horas Atuais" value="25h" isReadOnly />
-                            <Input placeholder="Total Horas" value="100h" isReadOnly ml="2" />
-                          </Flex>
-                        </Box>
-                      </Box>
-
-                      {/* Coluna 2: Horas (Práticas, Teóricas, Orientação) */}
-                      <Box flex="1">
-                        <Heading size="xs">Horas</Heading>
-
-                        <Box mt="2">
-                          <Text fontWeight="bold">Horas Práticas</Text>
-                          <Input placeholder="Horas Práticas" value="40h" isReadOnly />
-                        </Box>
-
-                        <Box mt="2">
-                          <Text fontWeight="bold">Horas Teóricas</Text>
-                          <Input placeholder="Horas Teóricas" value="60h" isReadOnly />
-                        </Box>
-
-                        <Box mt="2">
-                          <Text fontWeight="bold">Horas Orientação</Text>
-                          <Input placeholder="Horas Orientação" value="20h" isReadOnly />
                         </Box>
                       </Box>
                     </Flex>

@@ -14,14 +14,23 @@ const CursoAtualCursista = () => {
             {/* Título da Página */}
             <Heading size="lg" mb="4">Curso - Turma Atual</Heading>
 
-            {/* Tabs para Turma Atual e Histórico */}
+            {/* Tabs para Inscrição, Turma Atual e Histórico */}
             <Tabs variant="enclosed">
               <TabList>
+                <Tab>Inscrição</Tab>
                 <Tab>Turma Atual</Tab>
                 <Tab>Histórico</Tab>
               </TabList>
 
               <TabPanels>
+                <TabPanel>
+                  {/* Conteúdo da aba Inscrição */}
+                  <Heading size="md" mb="4">Inscrição</Heading>
+                  <Box>
+                    <p>Conteúdo da aba Inscrição será adicionado aqui futuramente.</p>
+                  </Box>
+                </TabPanel>
+
                 <TabPanel>
                   {/* Conteúdo da aba Turma Atual */}
                   <Flex justify="space-between" mt="4">
