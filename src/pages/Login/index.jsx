@@ -1,12 +1,48 @@
 import { Helmet } from "react-helmet";
-import { Button, Checkbox, Image, InputLeftElement, InputGroup, Input, Flex, Box, Text, InputRightElement } from "@chakra-ui/react";
+import {
+  Button,
+  Checkbox,
+  Image,
+  InputLeftElement,
+  InputGroup,
+  Input,
+  Flex,
+  Box,
+  Text,
+  InputRightElement,
+} from "@chakra-ui/react";
 import { useState } from "react";
+import api from "../../services/api"; // Certifique-se de importar o Axios corretamente
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [userLogin, setUserLogin] = useState(""); // Estado para o login
+  const [userPassword, setUserPassword] = useState(""); // Estado para a senha
+  const [error, setError] = useState(null); // Estado para gerenciar erros de autenticação
+  const navigate = useNavigate();
 
   const handlePasswordVisibility = () => setShowPassword(!showPassword);
+
+  const handleLogin = async () => {
+    try {
+      const response = await api.post("/login", {
+        login: userLogin,
+        password: userPassword,
+      });
+
+      // Salvando o token no localStorage
+      localStorage.setItem("token", response.data.token);
+
+      // Redirecionando para a página inicial
+      navigate("/Home1");
+    } catch (err) {
+      setError("Login ou senha incorretos."); // Define a mensagem de erro
+      console.error();
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -43,11 +79,16 @@ export default function LoginPage() {
           zIndex={0}
           h={{ md: "500px", base: "auto" }}
         >
+          {error && <Text color="red.500">{error}</Text>}
           <InputGroup mb="20px">
             <InputLeftElement>
               <Image src="images/img_firruser.svg" alt="Fi-rr-user" h="24px" w="24px" />
             </InputLeftElement>
-            <Input placeholder="Login" />
+            <Input
+              placeholder="Login"
+              value={userLogin}
+              onChange={(e) => setUserLogin(e.target.value)} // Atualiza o estado
+            />
           </InputGroup>
           <InputGroup mb="20px">
             <InputLeftElement>
@@ -56,10 +97,12 @@ export default function LoginPage() {
             <Input
               placeholder="Senha"
               type={showPassword ? "text" : "password"}
+              value={userPassword}
+              onChange={(e) => setUserPassword(e.target.value)} // Atualiza o estado
             />
             <InputRightElement width="4.5rem">
               <Button h="1.75rem" size="sm" variant="ghost" onClick={handlePasswordVisibility}>
-                <Image 
+                <Image
                   src={showPassword ? "images/eye_open.svg" : "images/eye_close.svg"}
                   alt={showPassword ? "Ocultar senha" : "Mostrar senha"}
                   h="24px"
@@ -69,7 +112,9 @@ export default function LoginPage() {
             </InputRightElement>
           </InputGroup>
           <Checkbox mb="20px">Lembrar login</Checkbox>
-          <Button colorScheme="blue" w="100%" mb="20px">Entrar</Button>
+          <Button colorScheme="blue" w="100%" mb="20px" onClick={handleLogin}>
+            Entrar
+          </Button>
           <Text textDecoration="underline">Esqueci minha senha</Text>
         </Flex>
         <Image

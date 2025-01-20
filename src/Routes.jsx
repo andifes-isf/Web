@@ -13,6 +13,7 @@ import CursoAtualCursista from "pages/CursoAtualCursista";
 import FeedbackCursista from "pages/FeedbackCursista";
 import Ementa from "pages/Ementa";
 import Ouvidoria from "pages/Ouvidoria";
+import TestConnection from "pages/TestConnection";
 
 const ProjectRoutes = () => {
   let element = useRoutes([
@@ -61,6 +62,10 @@ const ProjectRoutes = () => {
     {
       path: "ouvidoria", // Definindo o caminho da nova página
       element: <Ouvidoria />,
+    },
+    {
+      path: "test-connection", // Nova rota para teste de conexão
+      element: <TestConnection />,
     },
   ]);
 

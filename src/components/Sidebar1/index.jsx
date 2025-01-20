@@ -3,9 +3,11 @@ import React from "react";
 import { MenuItem, Menu, Sidebar, sidebarClasses } from "react-pro-sidebar";
 import { FiHome, FiUser, FiFileText } from "react-icons/fi";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { useNavigate } from "react-router-dom"; // Importa o useNavigate
 
 export default function Sidebar1({ ...props }) {
   const [collapsed, setCollapsed] = React.useState(false);
+  const navigate = useNavigate(); // Inicializa o hook useNavigate
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
@@ -71,6 +73,7 @@ export default function Sidebar1({ ...props }) {
             paddingLeft: "16px",
             position: "relative",
           }}
+          onClick={() => navigate("/usuario-cursista")} // Redireciona para a página
         >
           {!collapsed && "Cursista"}
         </MenuItem>

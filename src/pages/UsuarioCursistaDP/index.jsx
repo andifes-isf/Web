@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -14,21 +14,46 @@ import {
   TabList,
   TabPanel,
   TabPanels,
-  Text
-} from '@chakra-ui/react';
-import { DownloadIcon, EditIcon } from '@chakra-ui/icons';
-import { FaCamera } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import Header from '../../components/Header';
-import Sidebar1 from '../../components/Sidebar1';
-
+  Text,
+} from "@chakra-ui/react";
+import { DownloadIcon, EditIcon } from "@chakra-ui/icons";
+import { FaCamera } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
+import Sidebar1 from "../../components/Sidebar1";
+import api from "../../services/api";
 
 const UsuarioCursistaDP = () => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState(null); // Dados do usuário
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Obtenha o token salvo no localStorage após o login
+        const response = await api.get("/user/my_data", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        console.log(response.data); // Verifica os dados retornados
+        setUserData(response.data.data); // Ajuste para acessar os dados encapsulados na propriedade `data`
+      } catch (error) {
+        console.error("Erro ao buscar os dados do usuário:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleEditClick = () => {
-    navigate('/usuario-cursista-edicao');
+    navigate("/usuario-cursista-edicao");
   };
+
+  if (!userData) {
+    return <Text>Carregando...</Text>; // Mostra um texto enquanto os dados estão carregando
+  }
 
   return (
     <Flex direction="column" height="100vh">
@@ -40,7 +65,11 @@ const UsuarioCursistaDP = () => {
             {/* Header do perfil */}
             <Flex justify="space-between" align="center" mb="6">
               <HStack spacing="4">
-                <Avatar size="xl" name="Nome e Sobrenome" src="profile-placeholder.png" />
+                <Avatar
+                  size="xl"
+                  name={`${userData.name} ${userData.surname}`}
+                  src="profile-placeholder.png"
+                />
                 <IconButton
                   aria-label="Trocar Foto"
                   icon={<FaCamera />}
@@ -48,13 +77,16 @@ const UsuarioCursistaDP = () => {
                   borderRadius="full"
                   size="sm"
                 />
-                {/* Alinhando o nome e email logo após o ícone da câmera */}
                 <VStack align="start" spacing="0" ml="4">
-                  <Heading size="md">Nome e Sobrenome</Heading>
-                  <Box>email@email.com</Box>
+                  <Heading size="md">{`${userData.name} ${userData.surname}`}</Heading>
+                  <Box>{`${userData.email}@${userData.email_domain}`}</Box>
                 </VStack>
               </HStack>
-              <Button leftIcon={<EditIcon />} colorScheme="gray" onClick={handleEditClick}>
+              <Button
+                leftIcon={<EditIcon />}
+                colorScheme="gray"
+                onClick={handleEditClick}
+              >
                 Editar
               </Button>
             </Flex>
@@ -77,19 +109,39 @@ const UsuarioCursistaDP = () => {
                         <Heading size="xs">Dados Pessoais</Heading>
                         <Box mt="2">
                           <Text fontWeight="bold">Nome Completo</Text>
-                          <Input placeholder="Nome Completo" value="Nome Sobrenome" isReadOnly />
+                          <Input
+                            placeholder="Nome Completo"
+                            value={`${userData.name || ""} ${
+                              userData.surname || ""
+                            }`}
+                            isReadOnly
+                          />
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Telefone</Text>
-                          <Input placeholder="Telefone" value="(99) 99999-9999" isReadOnly />
+                          <Input
+                            placeholder="Telefone"
+                            value={`(${userData.DDD || ""}) ${
+                              userData.phone || ""
+                            }`}
+                            isReadOnly
+                          />
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Etnia</Text>
-                          <Input placeholder="Etnia" value="Pardo" isReadOnly />
+                          <Input
+                            placeholder="Etnia"
+                            value={userData.ethnicity || ""}
+                            isReadOnly
+                          />
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Gênero</Text>
-                          <Input placeholder="Gênero" value="Masculino" isReadOnly />
+                          <Input
+                            placeholder="Gênero"
+                            value={userData.gender || ""}
+                            isReadOnly
+                          />
                         </Box>
                       </Box>
 
@@ -98,15 +150,27 @@ const UsuarioCursistaDP = () => {
                         <Heading size="xs">Proeficiência Linguística</Heading>
                         <Box mt="2">
                           <Text fontWeight="bold">Nível</Text>
-                          <Input placeholder="Nível" value="Avançado" isReadOnly />
+                          <Input
+                            placeholder="Nível"
+                            value="Avançado"
+                            isReadOnly
+                          />
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Idioma</Text>
-                          <Input placeholder="Idioma" value="Inglês" isReadOnly />
+                          <Input
+                            placeholder="Idioma"
+                            value="Inglês"
+                            isReadOnly
+                          />
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">Documento Comprobatório</Text>
-                          <Button leftIcon={<DownloadIcon />} colorScheme="gray" variant="outline">
+                          <Button
+                            leftIcon={<DownloadIcon />}
+                            colorScheme="gray"
+                            variant="outline"
+                          >
                             Certificado.pdf
                           </Button>
                         </Box>
@@ -139,29 +203,65 @@ const UsuarioCursistaDP = () => {
                         <Box mt="2">
                           <Text fontWeight="bold">Núcleo Comum</Text>
                           <Flex>
-                            <Input placeholder="Horas Atuais" value="40h" isReadOnly />
-                            <Input placeholder="Total Horas" value="100h" isReadOnly ml="2" />
+                            <Input
+                              placeholder="Horas Atuais"
+                              value="40h"
+                              isReadOnly
+                            />
+                            <Input
+                              placeholder="Total Horas"
+                              value="100h"
+                              isReadOnly
+                              ml="2"
+                            />
                           </Flex>
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">CCI</Text>
                           <Flex>
-                            <Input placeholder="Horas Atuais" value="30h" isReadOnly />
-                            <Input placeholder="Total Horas" value="100h" isReadOnly ml="2" />
+                            <Input
+                              placeholder="Horas Atuais"
+                              value="30h"
+                              isReadOnly
+                            />
+                            <Input
+                              placeholder="Total Horas"
+                              value="100h"
+                              isReadOnly
+                              ml="2"
+                            />
                           </Flex>
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">CCTI</Text>
                           <Flex>
-                            <Input placeholder="Horas Atuais" value="30h" isReadOnly />
-                            <Input placeholder="Total Horas" value="100h" isReadOnly ml="2" />
+                            <Input
+                              placeholder="Horas Atuais"
+                              value="30h"
+                              isReadOnly
+                            />
+                            <Input
+                              placeholder="Total Horas"
+                              value="100h"
+                              isReadOnly
+                              ml="2"
+                            />
                           </Flex>
                         </Box>
                         <Box mt="2">
                           <Text fontWeight="bold">CCI - P</Text>
                           <Flex>
-                            <Input placeholder="Horas Atuais" value="30h" isReadOnly />
-                            <Input placeholder="Total Horas" value="100h" isReadOnly ml="2" />
+                            <Input
+                              placeholder="Horas Atuais"
+                              value="30h"
+                              isReadOnly
+                            />
+                            <Input
+                              placeholder="Total Horas"
+                              value="100h"
+                              isReadOnly
+                              ml="2"
+                            />
                           </Flex>
                         </Box>
                       </Box>
@@ -171,24 +271,41 @@ const UsuarioCursistaDP = () => {
 
                 <TabPanel>
                   {/* Seção de Horas */}
-                  <VStack spacing="4" align="start"> {/* Alinha os itens à esquerda */}
+                  <VStack spacing="4" align="start">
+                    {" "}
+                    {/* Alinha os itens à esquerda */}
                     <Box>
-                      <Heading size="xs" mb="2">Horas Práticas</Heading>
-                      <Input placeholder="Horas Práticas" value="40h" isReadOnly />
+                      <Heading size="xs" mb="2">
+                        Horas Práticas
+                      </Heading>
+                      <Input
+                        placeholder="Horas Práticas"
+                        value="40h"
+                        isReadOnly
+                      />
                     </Box>
-
                     <Box>
-                      <Heading size="xs" mb="2">Horas Teóricas</Heading>
-                      <Input placeholder="Horas Teóricas" value="60h" isReadOnly />
+                      <Heading size="xs" mb="2">
+                        Horas Teóricas
+                      </Heading>
+                      <Input
+                        placeholder="Horas Teóricas"
+                        value="60h"
+                        isReadOnly
+                      />
                     </Box>
-
                     <Box>
-                      <Heading size="xs" mb="2">Horas Orientação</Heading>
-                      <Input placeholder="Horas Orientação" value="20h" isReadOnly />
+                      <Heading size="xs" mb="2">
+                        Horas Orientação
+                      </Heading>
+                      <Input
+                        placeholder="Horas Orientação"
+                        value="20h"
+                        isReadOnly
+                      />
                     </Box>
                   </VStack>
                 </TabPanel>
-
               </TabPanels>
             </Tabs>
           </Box>
