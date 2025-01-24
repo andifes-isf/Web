@@ -94,8 +94,14 @@ const UsuarioCursistaDP = () => {
   }, []);
 
   const handleEditClick = () => {
-    navigate("/usuario-cursista-edicao");
-  };
+    navigate("/usuario-cursista-edicao", {
+      state: {
+        userData,
+        proeficiencies,
+        institutionData,
+      },
+    });
+  };  
 
   if (!userData) {
     return <Text>Carregando...</Text>; // Mostra um texto enquanto os dados estão carregando
