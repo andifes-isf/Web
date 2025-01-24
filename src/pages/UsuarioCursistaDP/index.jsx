@@ -26,21 +26,67 @@ import api from "../../services/api";
 const UsuarioCursistaDP = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null); // Dados do usuário
+  const [proeficiencies, setProeficiencies] = useState([]); // Dados de proficiência linguística
+  const [institutionData, setInstitutionData] = useState(null); // Dados da instituição atual
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem("token"); // Obtenha o token salvo no localStorage após o login
-        const response = await api.get("/user/my_data", {
+        const token = localStorage.getItem("token");
+
+        // Busca dados gerais do usuário
+        const userResponse = await api.get("/user/my_data", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        console.log(response.data); // Verifica os dados retornados
-        setUserData(response.data.data); // Ajuste para acessar os dados encapsulados na propriedade `data`
+        // Busca proficiências linguísticas
+        const proefResponse = await api.get(
+          "/aluno_isf/visualizar_minha_proeficiencia",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        // Busca instituição atual
+        const institutionResponse = await api.get(
+          "/aluno_deinstituicao/visualizar_instituicao_atual",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setUserData(userResponse.data.data); // Armazena os dados do usuário
+        setProeficiencies(proefResponse.data.proeficiencies); // Armazena as proficiências
+
+        if (!institutionResponse.data.error) {
+          const institutionId =
+            institutionResponse.data.registration.idInstituicao;
+
+          // Busca detalhes da instituição
+          const institutionDetailsResponse = await api.get(
+            `/instituicao_ensino/${institutionId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          const institutionData = institutionDetailsResponse.data.instituicao;
+
+          setInstitutionData({
+            nome: institutionData.nome, // Nome da instituição
+            comprovante: institutionResponse.data.registration.comprovante, // Comprovante de matrícula
+          });
+        }
       } catch (error) {
-        console.error("Erro ao buscar os dados do usuário:", error);
+        console.error("Erro ao buscar os dados:", error);
       }
     };
 
@@ -148,46 +194,76 @@ const UsuarioCursistaDP = () => {
                       {/* Coluna 2: Proeficiência Linguística */}
                       <Box flex="1" mr="4">
                         <Heading size="xs">Proeficiência Linguística</Heading>
-                        <Box mt="2">
-                          <Text fontWeight="bold">Nível</Text>
-                          <Input
-                            placeholder="Nível"
-                            value="Avançado"
-                            isReadOnly
-                          />
-                        </Box>
-                        <Box mt="2">
-                          <Text fontWeight="bold">Idioma</Text>
-                          <Input
-                            placeholder="Idioma"
-                            value="Inglês"
-                            isReadOnly
-                          />
-                        </Box>
-                        <Box mt="2">
-                          <Text fontWeight="bold">Documento Comprobatório</Text>
-                          <Button
-                            leftIcon={<DownloadIcon />}
-                            colorScheme="gray"
-                            variant="outline"
-                          >
-                            Certificado.pdf
-                          </Button>
-                        </Box>
+                        {proeficiencies.length > 0 ? (
+                          proeficiencies.map((proef, index) => (
+                            <Box
+                              key={index}
+                              mt="4"
+                              borderWidth="1px"
+                              borderRadius="md"
+                              p="4"
+                              boxShadow="sm"
+                            >
+                              <Text fontWeight="bold">Idioma</Text>
+                              <Input value={proef.idioma} isReadOnly />
+
+                              <Text fontWeight="bold" mt="2">
+                                Nível
+                              </Text>
+                              <Input value={proef.nivel} isReadOnly />
+
+                              <Text fontWeight="bold" mt="2">
+                                Comprovante
+                              </Text>
+                              <Button
+                                leftIcon={<DownloadIcon />}
+                                colorScheme="gray"
+                                variant="outline"
+                                onClick={() => alert(proef.comprovante)} // Substitua com a lógica para abrir/baixar o comprovante
+                              >
+                                Ver Comprovante
+                              </Button>
+                            </Box>
+                          ))
+                        ) : (
+                          <Text mt="4">Nenhuma proficiência cadastrada.</Text>
+                        )}
                       </Box>
 
                       {/* Coluna 3: Instituição */}
                       <Box flex="1">
                         <Heading size="xs">Instituição</Heading>
+
                         <Box mt="2">
                           <Text fontWeight="bold">Nome da Instituição</Text>
-                          <Input placeholder="Nome da Instituição" value="Universidade XYZ" isReadOnly />
+                          <Input
+                            placeholder="Nome da Instituição"
+                            value={
+                              institutionData?.nome ||
+                              "Nenhuma instituição vinculada"
+                            }
+                            isReadOnly
+                          />
                         </Box>
+
                         <Box mt="2">
-                          <Text fontWeight="bold">Comprovante de Matrícula</Text>
-                          <Button leftIcon={<DownloadIcon />} colorScheme="gray" variant="outline">
-                            Comprovante.pdf
-                          </Button>
+                          <Text fontWeight="bold">
+                            Comprovante de Matrícula
+                          </Text>
+                          {institutionData?.comprovante ? (
+                            <Button
+                              leftIcon={<DownloadIcon />}
+                              colorScheme="gray"
+                              variant="outline"
+                              onClick={() =>
+                                alert(institutionData?.comprovante)
+                              } // Altere para a lógica de exibição ou download do comprovante
+                            >
+                              Ver Comprovante
+                            </Button>
+                          ) : (
+                            <Text>Comprovante não disponível.</Text>
+                          )}
                         </Box>
                       </Box>
                     </Flex>
