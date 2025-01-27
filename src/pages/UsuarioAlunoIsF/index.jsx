@@ -23,7 +23,7 @@ import Header from "../../components/Header";
 import Sidebar1 from "../../components/Sidebar1";
 import api from "../../services/api";
 
-const UsuarioCursistaDP = () => {
+const UsuarioAlunoIsF = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null); // Dados do usuário
   const [proeficiencies, setProeficiencies] = useState([]); // Dados de proficiência linguística
@@ -94,7 +94,7 @@ const UsuarioCursistaDP = () => {
   }, []);
 
   const handleEditClick = () => {
-    navigate("/usuario-cursista-edicao", {
+    navigate("/usuario-alunoisf-edicao", {
       state: {
         userData,
         proeficiencies,
@@ -397,4 +397,4 @@ const UsuarioCursistaDP = () => {
   );
 };
 
-export default UsuarioCursistaDP;
+export default UsuarioAlunoIsF;

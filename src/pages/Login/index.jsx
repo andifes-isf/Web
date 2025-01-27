@@ -21,25 +21,54 @@ export default function LoginPage() {
   const [userLogin, setUserLogin] = useState(""); // Estado para o login
   const [userPassword, setUserPassword] = useState(""); // Estado para a senha
   const [error, setError] = useState(null); // Estado para gerenciar erros de autenticação
+  const [isLoading, setIsLoading] = useState(false); // Estado para o botão de carregamento
   const navigate = useNavigate();
 
   const handlePasswordVisibility = () => setShowPassword(!showPassword);
 
   const handleLogin = async () => {
+    if (!userLogin || !userPassword) {
+      setError("Preencha todos os campos.");
+      return;
+    }
+
+    setIsLoading(true);
+
     try {
+      // Faz a requisição de login
       const response = await api.post("/login", {
         login: userLogin,
         password: userPassword,
       });
 
-      // Salvando o token no localStorage
-      localStorage.setItem("token", response.data.token);
+      const { token } = response.data;
 
-      // Redirecionando para a página inicial
+      // Salva o token no localStorage
+      localStorage.setItem("token", token);
+
+      // Faz uma chamada para obter os dados do usuário
+      const userResponse = await api.get("/user/my_data", {
+        headers: { Authorization: `Bearer ${token}` }, // Envia o token no header
+      });
+
+      if (userResponse.data.error) {
+        throw new Error("Erro ao recuperar dados do usuário.");
+      }
+
+      const { type } = userResponse.data.data;
+
+      // Salva o tipo do usuário no localStorage
+      localStorage.setItem("userType", type);
+
+      console.log("Login bem-sucedido. Tipo do usuário:", type);
+
+      // Redireciona para a página Home
       navigate("/Home1");
     } catch (err) {
-      setError("Login ou senha incorretos."); // Define a mensagem de erro
-      console.error();
+      console.error("Erro no login:", err);
+      setError("Erro ao realizar login. Verifique suas credenciais.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -112,7 +141,13 @@ export default function LoginPage() {
             </InputRightElement>
           </InputGroup>
           <Checkbox mb="20px">Lembrar login</Checkbox>
-          <Button colorScheme="blue" w="100%" mb="20px" onClick={handleLogin}>
+          <Button
+            colorScheme="blue"
+            w="100%"
+            mb="20px"
+            onClick={handleLogin}
+            isLoading={isLoading}
+          >
             Entrar
           </Button>
           <Text textDecoration="underline">Esqueci minha senha</Text>

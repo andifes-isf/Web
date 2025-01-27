@@ -4,8 +4,8 @@ import Home from "pages/Home";
 import NotFound from "pages/NotFound";
 import Login from "pages/Login";
 import Home1 from "pages/Home1";
-import UsuarioCursistaDP from "pages/UsuarioCursistaDP";
-import UsuarioCursistaDPEdicao from "pages/UsuarioCursistaDPEdicao";
+import UsuarioAlunoIsF from "pages/UsuarioAlunoIsF";
+import UsuarioAlunoIsFEdicao from "pages/UsuarioAlunoIsFEdicao";
 import RelatorioHorasPraticasCursista from "pages/RelatorioHorasPraticasCursista";
 import RelatorioOrientacao from "pages/RelatorioOrientacao";
 import RelatorioHorasTeoricas from "pages/RelatorioHorasTeoricas";
@@ -14,6 +14,9 @@ import FeedbackCursista from "pages/FeedbackCursista";
 import Ementa from "pages/Ementa";
 import Ouvidoria from "pages/Ouvidoria";
 import TestConnection from "pages/TestConnection";
+import UsuarioProfessorIsF from "pages/UsuarioProfessorIsF";
+import UsuarioProfessorIsFEdicao from "pages/UsuarioProfessorIsFEdicao";
+
 
 const ProjectRoutes = () => {
   let element = useRoutes([
@@ -28,12 +31,12 @@ const ProjectRoutes = () => {
       element: <Home1 />,
     },
     {
-      path: "usuario-cursista", // Definindo o caminho da nova página
-      element: <UsuarioCursistaDP />,
+      path: "usuario-alunoisf", // Definindo o caminho da nova página
+      element: <UsuarioAlunoIsF />,
     },
     {
-      path: "usuario-cursista-edicao", // Definindo o caminho da nova página
-      element: <UsuarioCursistaDPEdicao />,
+      path: "usuario-alunoisf-edicao", // Definindo o caminho da nova página
+      element: <UsuarioAlunoIsFEdicao />,
     },
     {
       path: "relatorio-horas-praticas-cursista", // Definindo o caminho da nova página
@@ -66,6 +69,14 @@ const ProjectRoutes = () => {
     {
       path: "test-connection", // Nova rota para teste de conexão
       element: <TestConnection />,
+    },
+    {
+      path: "usuario-professorisf", // Definindo o caminho da nova página
+      element: <UsuarioProfessorIsF />,
+    },
+    {
+      path: "usuario-professorisf-edicao", // Definindo o caminho da nova página
+      element: <UsuarioProfessorIsFEdicao />,
     },
   ]);
 

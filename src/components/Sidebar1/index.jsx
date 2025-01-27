@@ -3,14 +3,27 @@ import React from "react";
 import { MenuItem, Menu, Sidebar, sidebarClasses } from "react-pro-sidebar";
 import { FiHome, FiUser, FiFileText } from "react-icons/fi";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { useNavigate } from "react-router-dom"; // Importa o useNavigate
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar1({ ...props }) {
   const [collapsed, setCollapsed] = React.useState(false);
-  const navigate = useNavigate(); // Inicializa o hook useNavigate
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
+  };
+
+  const handleCursistaClick = () => {
+    const userType = localStorage.getItem("userType"); // Recupera o tipo do usuário do localStorage
+    console.log("Tipo do usuário:", userType); // Loga o tipo do usuário no console
+
+    if (userType === "alunoisf") {
+      navigate("/usuario-alunoisf"); // Redireciona para a página do aluno
+    } else if (userType === "professorisf") {
+      navigate("/usuario-professorisf"); // Redireciona para a página do professor
+    } else {
+      console.error("Tipo de usuário não autorizado para acessar esta página.");
+    }
   };
 
   return (
@@ -43,7 +56,7 @@ export default function Sidebar1({ ...props }) {
             [`&:hover, &.ps-active`]: { color: "#000000", backgroundColor: "#f7f7f7 !important" },
           },
         }}
-        rootStyles={{ ["&>ul"]: { gap: "10px" } }}
+        rootStyles={{ "&>ul": { gap: "10px" } }}
         as={Menu}
         display="flex"
         alignSelf="stretch"
@@ -62,6 +75,7 @@ export default function Sidebar1({ ...props }) {
             fontWeight: "bold",
             position: "relative",
           }}
+          onClick={() => navigate("/home")} // Redireciona para a página Home
         >
           {!collapsed && "Home"}
         </MenuItem>
@@ -73,7 +87,7 @@ export default function Sidebar1({ ...props }) {
             paddingLeft: "16px",
             position: "relative",
           }}
-          onClick={() => navigate("/usuario-cursista")} // Redireciona para a página
+          onClick={handleCursistaClick} // Verifica o tipo antes de redirecionar
         >
           {!collapsed && "Cursista"}
         </MenuItem>

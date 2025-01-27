@@ -24,7 +24,7 @@ import Header from "../../components/Header";
 import Sidebar1 from "../../components/Sidebar1";
 import api from "../../services/api";
 
-const UsuarioCursistaDPEdicao = () => {
+const UsuarioAlunoIsFEdicao = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const {
@@ -68,7 +68,7 @@ const UsuarioCursistaDPEdicao = () => {
       alert("Dados do usuário atualizados com sucesso!");
 
       // Redirecionar para a página de exibição após salvar
-      navigate("/usuario-cursista", {
+      navigate("/usuario-alunoisf", {
         state: { userData, proeficiencies, institutionData },
       });
     } catch (error) {
@@ -132,7 +132,7 @@ const UsuarioCursistaDPEdicao = () => {
                       <Box flex="1" mr="4">
                         <Heading size="xs">Dados Pessoais</Heading>
                         <Box mt="2">
-                          <Text fontWeight="bold">Nome Completo</Text>
+                          <Text fontWeight="bold">Nome</Text>
                           <Input
                             placeholder="Nome"
                             value={userData.name || ""}
@@ -334,4 +334,4 @@ const UsuarioCursistaDPEdicao = () => {
   );
 };
 
-export default UsuarioCursistaDPEdicao;
+export default UsuarioAlunoIsFEdicao;
