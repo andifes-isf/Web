@@ -24,19 +24,32 @@ import Sidebar1 from '../../components/Sidebar1';
 import api from '../../services/api';
 
 const CursoAtualCursista = () => {
-  const [cursos, setCursos] = useState([]);
+  const [disciplinas, setDisciplinas] = useState([]);
+  const [turmaAtual, setTurmaAtual] = useState(null);
 
   useEffect(() => {
-    const fetchCursos = async () => {
+    const fetchDisciplinas = async () => {
       try {
-        const response = await api.get('/curso');
-        setCursos(response.data);
+        const response = await api.get('/disciplina_especializacao');
+        setDisciplinas(response.data);
       } catch (error) {
-        console.error('Erro ao buscar cursos:', error);
+        console.error('Erro ao buscar disciplinas:', error);
       }
     };
 
-    fetchCursos();
+    const fetchTurmaAtual = async () => {
+      try {
+        const response = await api.get('/specialization_student/my_classes');
+        if (!response.data.error && response.data.data.length > 0) {
+          setTurmaAtual(response.data.data[0]); // Pega a primeira turma encontrada
+        }
+      } catch (error) {
+        console.error('Erro ao buscar turma atual:', error);
+      }
+    };
+
+    fetchDisciplinas();
+    fetchTurmaAtual();
   }, []);
 
   return (
@@ -62,84 +75,79 @@ const CursoAtualCursista = () => {
                   {/* Conteúdo da aba Inscrição */}
                   <Heading size="md" mb="4">Inscrição</Heading>
                   <Box overflowX="auto">
-                    {cursos.length > 0 ? (
+                    {disciplinas.length > 0 ? (
                       <Table variant="simple" size="md">
                         <Thead>
                           <Tr>
-                            <Th>Nome do Curso</Th>
-                            <Th>Idioma</Th>
+                            <Th>Nome da Disciplina</Th>
+                            <Th>Descrição</Th>
+                            <Th>Eixo Temático</Th>
                             <Th>Categoria</Th>
-                            <Th>Nível</Th>
-                            <Th>Carga Horária</Th>
                           </Tr>
                         </Thead>
                         <Tbody>
-                          {cursos.map((curso) => (
-                            <Tr key={curso.idCurso}>
-                              <Td>{curso.nome}</Td>
-                              <Td>{curso.idioma}</Td>
-                              <Td>{curso.categoria}</Td>
-                              <Td>{curso.nivel}</Td>
-                              <Td>{curso.cargaHoraria}h</Td>
+                          {disciplinas.map((disciplina, index) => (
+                            <Tr key={index}>
+                              <Td>{disciplina.nome}</Td>
+                              <Td>{disciplina.descricao}</Td>
+                              <Td>{disciplina.eixoTematico}</Td>
+                              <Td>{disciplina.categoria}</Td>
                             </Tr>
                           ))}
                         </Tbody>
                       </Table>
                     ) : (
-                      <Text>Nenhum curso encontrado.</Text>
+                      <Text>Nenhuma disciplina encontrada.</Text>
                     )}
                   </Box>
                 </TabPanel>
 
                 <TabPanel>
                   {/* Conteúdo da aba Turma Atual */}
-                  <Flex justify="space-between" mt="4">
-                    <Box flex="1" mr="8">
-                      <VStack spacing="4" align="stretch">
-                        <Box>
-                          <Heading size="xs" mb="2">Nome da Turma</Heading>
-                          <Select placeholder="Nome da Turma" isReadOnly>
-                            <option value="turma1">Turma 1</option>
-                            <option value="turma2">Turma 2</option>
-                          </Select>
-                        </Box>
-                        <Box>
-                          <Heading size="xs" mb="2">Idioma</Heading>
-                          <Select placeholder="Idioma" isReadOnly>
-                            <option value="ingles">Inglês</option>
-                            <option value="espanhol">Espanhol</option>
-                          </Select>
-                        </Box>
-                        <Box>
-                          <Heading size="xs" mb="2">Componente</Heading>
-                          <Select placeholder="Componente" isReadOnly>
-                            <option value="componente1">Componente 1</option>
-                            <option value="componente2">Componente 2</option>
-                          </Select>
-                        </Box>
-                        <Box>
-                          <Heading size="xs" mb="2">Docente</Heading>
-                          <Select placeholder="Docente" isReadOnly>
-                            <option value="docente1">Docente 1</option>
-                            <option value="docente2">Docente 2</option>
-                          </Select>
-                        </Box>
-                      </VStack>
-                    </Box>
+                  <Heading size="md" mb="4">Turma Atual</Heading>
+                  {turmaAtual ? (
+                    <Flex justify="space-between" mt="4">
+                      <Box flex="1" mr="8">
+                        <VStack spacing="4" align="stretch">
+                          <Box>
+                            <Heading size="xs" mb="2">Nome da Turma</Heading>
+                            <Input
+                              placeholder="Nome da Turma"
+                              value={turmaAtual.disciplina || ''}
+                              isReadOnly
+                            />
+                          </Box>
+                          <Box>
+                            <Heading size="xs" mb="2">Idioma</Heading>
+                            <Input placeholder="Idioma" value="" isReadOnly />
+                          </Box>
+                          <Box>
+                            <Heading size="xs" mb="2">Componente</Heading>
+                            <Input placeholder="Componente" value="" isReadOnly />
+                          </Box>
+                          <Box>
+                            <Heading size="xs" mb="2">Docente</Heading>
+                            <Input placeholder="Docente" value="" isReadOnly />
+                          </Box>
+                        </VStack>
+                      </Box>
 
-                    <Box flex="1">
-                      <VStack spacing="4" align="stretch">
-                        <Box>
-                          <Heading size="xs" mb="2">Horas Teóricas</Heading>
-                          <Input placeholder="Horas Teóricas" isReadOnly />
-                        </Box>
-                        <Box>
-                          <Heading size="xs" mb="2">Horas Práticas</Heading>
-                          <Input placeholder="Horas Práticas" isReadOnly />
-                        </Box>
-                      </VStack>
-                    </Box>
-                  </Flex>
+                      <Box flex="1">
+                        <VStack spacing="4" align="stretch">
+                          <Box>
+                            <Heading size="xs" mb="2">Horas Teóricas</Heading>
+                            <Input placeholder="Horas Teóricas" value="" isReadOnly />
+                          </Box>
+                          <Box>
+                            <Heading size="xs" mb="2">Horas Práticas</Heading>
+                            <Input placeholder="Horas Práticas" value="" isReadOnly />
+                          </Box>
+                        </VStack>
+                      </Box>
+                    </Flex>
+                  ) : (
+                    <Text>Turma atual não encontrada.</Text>
+                  )}
                 </TabPanel>
 
                 <TabPanel>
@@ -170,7 +178,15 @@ const CursoAtualCursista = () => {
                           <Td>Professor X</Td>
                           <Td>Concluído</Td>
                           <Td>Ementa A</Td>
-                          <Td><a href="http://moodle.com/turmaA" target="_blank" rel="noopener noreferrer">Link</a></Td>
+                          <Td>
+                            <a
+                              href="http://moodle.com/turmaA"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Link
+                            </a>
+                          </Td>
                         </Tr>
                         <Tr>
                           <Td>Turma B</Td>
@@ -178,7 +194,15 @@ const CursoAtualCursista = () => {
                           <Td>Professor Y</Td>
                           <Td>Em andamento</Td>
                           <Td>Ementa B</Td>
-                          <Td><a href="http://moodle.com/turmaB" target="_blank" rel="noopener noreferrer">Link</a></Td>
+                          <Td>
+                            <a
+                              href="http://moodle.com/turmaB"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Link
+                            </a>
+                          </Td>
                         </Tr>
                       </Tbody>
                     </Table>
