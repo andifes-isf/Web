@@ -16,6 +16,8 @@ import Ouvidoria from "pages/Ouvidoria";
 import TestConnection from "pages/TestConnection";
 import UsuarioProfessorIsF from "pages/UsuarioProfessorIsF";
 import UsuarioProfessorIsFEdicao from "pages/UsuarioProfessorIsFEdicao";
+import UsuarioCursista from "pages/UsuarioCursista";
+import UsuarioCursistaEdicao from "pages/UsuarioCursistaEdicao";
 
 
 const ProjectRoutes = () => {
@@ -77,6 +79,14 @@ const ProjectRoutes = () => {
     {
       path: "usuario-professorisf-edicao", // Definindo o caminho da nova página
       element: <UsuarioProfessorIsFEdicao />,
+    },
+    {
+      path: "usuario-cursista", // Definindo o caminho da nova página
+      element: <UsuarioCursista />,
+    },
+    {
+      path: "usuario-cursista-edicao", // Definindo o caminho da nova página
+      element: <UsuarioCursistaEdicao />,
     },
   ]);
 

@@ -21,6 +21,8 @@ export default function Sidebar1({ ...props }) {
       navigate("/usuario-alunoisf"); // Redireciona para a página do aluno
     } else if (userType === "professorisf") {
       navigate("/usuario-professorisf"); // Redireciona para a página do professor
+    } else if (userType === "cursista") {
+      navigate("/usuario-cursista");
     } else {
       console.error("Tipo de usuário não autorizado para acessar esta página.");
     }

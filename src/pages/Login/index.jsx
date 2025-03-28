@@ -55,15 +55,24 @@ export default function LoginPage() {
         throw new Error("Erro ao recuperar dados do usuário.");
       }
 
-      const { type } = userResponse.data.data;
+      const { type, login } = userResponse.data.data;
 
-      // Salva o tipo do usuário no localStorage
+      // Salva o tipo e o login do usuário no localStorage
       localStorage.setItem("userType", type);
+      localStorage.setItem("login", login);
 
       console.log("Login bem-sucedido. Tipo do usuário:", type);
 
-      // Redireciona para a página Home
-      navigate("/Home1");
+      // Redireciona com base no tipo de usuário
+      if (type === "professorisf") {
+        navigate("/home1");
+      } else if (type === "alunoisf") {
+        navigate("/home1");
+      } else if (type === "cursista") {
+        navigate("/home1");
+      } else {
+        throw new Error("Tipo de usuário não reconhecido.");
+      }
     } catch (err) {
       console.error("Erro no login:", err);
       setError("Erro ao realizar login. Verifique suas credenciais.");
@@ -116,7 +125,7 @@ export default function LoginPage() {
             <Input
               placeholder="Login"
               value={userLogin}
-              onChange={(e) => setUserLogin(e.target.value)} // Atualiza o estado
+              onChange={(e) => setUserLogin(e.target.value)}
             />
           </InputGroup>
           <InputGroup mb="20px">
@@ -127,7 +136,7 @@ export default function LoginPage() {
               placeholder="Senha"
               type={showPassword ? "text" : "password"}
               value={userPassword}
-              onChange={(e) => setUserPassword(e.target.value)} // Atualiza o estado
+              onChange={(e) => setUserPassword(e.target.value)}
             />
             <InputRightElement width="4.5rem">
               <Button h="1.75rem" size="sm" variant="ghost" onClick={handlePasswordVisibility}>

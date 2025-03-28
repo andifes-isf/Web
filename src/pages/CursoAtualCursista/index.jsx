@@ -1,9 +1,44 @@
-import React from 'react';
-import { Input, Box, Flex, Heading, Tabs, Tab, TabList, TabPanels, TabPanel, VStack, Select, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import {
+  Input,
+  Box,
+  Flex,
+  Heading,
+  Tabs,
+  Tab,
+  TabList,
+  TabPanels,
+  TabPanel,
+  VStack,
+  Select,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Text,
+} from '@chakra-ui/react';
 import Header from '../../components/Header';
 import Sidebar1 from '../../components/Sidebar1';
+import api from '../../services/api';
 
 const CursoAtualCursista = () => {
+  const [cursos, setCursos] = useState([]);
+
+  useEffect(() => {
+    const fetchCursos = async () => {
+      try {
+        const response = await api.get('/curso');
+        setCursos(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar cursos:', error);
+      }
+    };
+
+    fetchCursos();
+  }, []);
+
   return (
     <Flex direction="column" height="100vh">
       <Header />
@@ -26,8 +61,33 @@ const CursoAtualCursista = () => {
                 <TabPanel>
                   {/* Conteúdo da aba Inscrição */}
                   <Heading size="md" mb="4">Inscrição</Heading>
-                  <Box>
-                    <p>Conteúdo da aba Inscrição será adicionado aqui futuramente.</p>
+                  <Box overflowX="auto">
+                    {cursos.length > 0 ? (
+                      <Table variant="simple" size="md">
+                        <Thead>
+                          <Tr>
+                            <Th>Nome do Curso</Th>
+                            <Th>Idioma</Th>
+                            <Th>Categoria</Th>
+                            <Th>Nível</Th>
+                            <Th>Carga Horária</Th>
+                          </Tr>
+                        </Thead>
+                        <Tbody>
+                          {cursos.map((curso) => (
+                            <Tr key={curso.idCurso}>
+                              <Td>{curso.nome}</Td>
+                              <Td>{curso.idioma}</Td>
+                              <Td>{curso.categoria}</Td>
+                              <Td>{curso.nivel}</Td>
+                              <Td>{curso.cargaHoraria}h</Td>
+                            </Tr>
+                          ))}
+                        </Tbody>
+                      </Table>
+                    ) : (
+                      <Text>Nenhum curso encontrado.</Text>
+                    )}
                   </Box>
                 </TabPanel>
 
