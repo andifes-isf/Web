@@ -1,113 +1,69 @@
-## Sistema IsF - WEB
+# IsF Web
 
-Generated with ❤️ from [DhiWise](https://www.dhiwise.com)
+Sistema de gerenciamento de alunos desenvolvido com React e Node.js.
 
-## Description
+## ✨ Visão Geral
 
-- This React application is built using [create-react-app](https://create-react-app.dev/).
-- It uses [Chakra UI](https://chakra-ui.com/)
-- The application is generated in JavaScript.
+O IsF Web é um sistema criado para facilitar o controle e o acompanhamento de estudantes. A aplicação permite a gestão de informações de usuários, organização de turmas, atribuição de permissões e visualização de relatórios.
 
-## Pre-requisites
+## 🛠️ Tecnologias Utilizadas
 
-- [git](https://git-scm.com/) - v2.13 or greater
-- [NodeJS](https://nodejs.org/en/) - v16 or greater
-- [npm](https://www.npmjs.com/) - v6 or greater
+- **Frontend:** React.js
+- **Backend:** Node.js (Express)
+- **Banco de Dados:** MySQL
+- **Outras ferramentas:** Axios, JWT, etc.
 
-## Running in dev environment
+## 🚀 Funcionalidades Principais
 
-1. `cd YOUR_APPLICATION`
-2. `npm install`
-3. `npm start`
+- Cadastro e autenticação de usuários
+- Criação e gerenciamento de turmas
+- Atribuição de permissões por perfil
+- Interface amigável e responsiva
+- Relatórios e visualizações administrativas
 
-## .env file
+## ⚙️ Como Executar o Projeto
 
-This file contains various environment variables that you can configure.
+### Pré-requisitos
 
-## Folder Structure
+- Node.js instalado
+- npm ou yarn
+- Banco de dados configurado
+
+### Frontend
+
+```bash
+# Acesse a pasta do frontend
+cd frontend
+
+# Instale as dependências
+npm install
+
+# Inicie o servidor de desenvolvimento
+npm start
+```
+
+## 📁 Estrutura do Projeto
 
 ```
-.
-├── package.json
-├── public
-│   ├── assets
-│   │   ├── images --------- All Project Images
-│   │   └── fonts ---------- Project fonts
-│   ├── favicon.ico
-│   ├── index.html
-│   ├── manifest.json
-│   └── robots.txt
+Web-main/
+├── backend/
+│   └── src/
+│       └── controllers/
+│       └── routes/
+│       └── models/
+├── frontend/
+│   └── src/
+│       └── components/
+│       └── pages/
+│       └── services/
 ├── README.md
-└── src
-    ├── App.jsx
-    ├── components --------- UI and Detected Common Components
-    ├── constants ---------- Project constants
-    ├── theme --------- Theme configuration
-    │   └── components ----- Component style
-    │   └── foundations ---- Base styles
-    ├── hooks -------------- Helpful Hooks
-    ├── index.jsx
-    ├── pages -------------- All route pages
-    ├── Routes.jsx ---------- Routing
-    ├── styles
-    │   └── index.css ------ Other Global Styles
-    └── util
-        └── index.jsx ------- Helpful utils
 ```
 
-For the project to build, **these files must exist with exact filenames**:
+## 📌 Observações
 
-- `public/index.html` is the page template;
-- `src/index.jsx` is the JavaScript entry point.
+- Certifique-se de que o backend esteja rodando antes de acessar o frontend.
+- As variáveis de ambiente devem ser corretamente definidas no `.env`.
 
-You may create subdirectories inside src.
+---
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time.
-
-## Installing a Dependency
-
-You can install any dependencies (for example, React Router) with `npm`:
-
-```sh
-npm install --save react-router
-```
-
-Alternatively you may use `yarn`:
-
-```sh
-yarn add react-router
-```
-
-## License
-
-MIT License
-
-Copyright (c) 2024 DhiWise
-
-Permission is hereby granted to any person obtaining a copy of this software and associated documentation files (the "Software"),to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+Este projeto foi desenvolvido com foco em usabilidade e escalabilidade, visando atender às necessidades do programa IsF (Idiomas sem Fronteiras).
